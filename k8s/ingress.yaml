@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: suss-workshop
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/backend-protocol: "http"
+    nginx.ingress.kubernetes.io/load-balance: "ewma"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  tls:
+    - secretName: cert-fairbank-io
+  rules:
+    - host: chat.fairbank.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: suss-workshop
+              servicePort: main

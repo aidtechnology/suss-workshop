@@ -118,7 +118,7 @@ func runClient(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	endpoint := fmt.Sprintf("ws://%s/connect", args[0])
+	endpoint := fmt.Sprintf("%s/connect", args[0])
  	headers := make(http.Header)
  	headers.Set("X-user-certificate", base64.StdEncoding.EncodeToString(c))
 	dialer := websocket.Dialer{

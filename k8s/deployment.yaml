@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: suss-workshop
+  labels:
+    app: suss-workshop
+    version: 0.1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: suss-workshop
+      version: 0.1.0
+  template:
+    metadata:
+      name: suss-workshop
+      labels:
+        app: suss-workshop
+        version: 0.1.0
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: suss-workshop
+          image: gcr.io/fairbank-io/suss-workshop:0.1.0
+          imagePullPolicy: Always
+          ports:
+            - name: main
+              containerPort: 9090
+          args:
+            - "server"
