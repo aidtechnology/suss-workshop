@@ -1,0 +1,16 @@
+{
+  "cn": "AID:Technology Sample Root CA",
+  "key": {
+    "algo": "ecdsa",
+    "size": 256
+  },
+  "names": [{
+    "o":  "AID:Tech",
+    "ou": "Development Team",
+    "sa": "31-32 Leeson St. Lower",
+    "l": "Dublin",
+    "st": "County Dublin",
+    "c":  "IR",
+    "pc": "F838"
+  }]
+}

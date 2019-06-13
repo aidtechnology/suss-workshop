@@ -1,0 +1,19 @@
+{
+  "cn": "did:bryk:4d81bd52-2edb-4703-b8fc-b26d514a9c56",
+  "hosts": [
+    "did:bryk:4d81bd52-2edb-4703-b8fc-b26d514a9c56"
+  ],
+  "key": {
+    "algo": "ecdsa",
+    "size": 521
+  },
+  "names": [
+    {
+      "sa": "1400 S Joyce St",
+      "l": "Arlington",
+      "st": "Virginia",
+      "pc": "22202",
+      "c": "US"
+    }
+  ]
+}

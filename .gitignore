@@ -1,0 +1,15 @@
+# Generals
+.DS_Store
+.idea
+
+# Deps
+vendor/**
+
+# Binaries and support files
+ca-roots.crt
+suss-workshop
+suss-workshop-linux
+**/*_secret.yaml
+
+# Private keys
+**/*.pem
