@@ -2,22 +2,33 @@ package cmd
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"time"
 
+	"github.com/aidtechnology/suss-workshop/cmd/chat"
 	"github.com/bryk-io/x/pki"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/websocket"
 	"github.com/spf13/cobra"
 )
 
-// serverCmd represents the server command
 var serverCmd = &cobra.Command{
 	Use:   "server",
 	Short: "Start a server instance for the sample digital service",
 	RunE:  runServer,
+}
+
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+	CheckOrigin: func(*http.Request) bool {
+		return true
+	},
 }
 
 type serviceResponse struct {
@@ -34,17 +45,21 @@ func init() {
 	rootCmd.AddCommand(serverCmd)
 }
 
-func runServer(cmd *cobra.Command, _ []string) error {
+func runServer(_ *cobra.Command, _ []string) error {
 	// Get server's certificate authority
 	ca, err := getCA()
 	if err != nil {
 		return err
 	}
 
+	// Users hub
+	hub := chat.NewHub()
+	go hub.Run()
+
 	// Setup server's router
 	router := mux.NewRouter()
 	router.HandleFunc("/enroll", enrollHandler(ca)).Methods(http.MethodPost)
-	router.HandleFunc("/connect", connectHandler(ca)).Methods(http.MethodGet)
+	router.HandleFunc("/connect", connectHandler(ca, hub)).Methods(http.MethodGet)
 	router.PathPrefix("/").HandlerFunc(func(res http.ResponseWriter, _ *http.Request) {
 		res.Header().Set("Content-Type", "application/json")
 		res.WriteHeader(200)
@@ -154,14 +169,48 @@ func enrollHandler(ca *pki.CA) http.HandlerFunc {
 // Connect
 // Receive a user request to start a session with the service.
 // The server will validate the client certificate to prevent unauthorized access.
-func connectHandler(ca *pki.CA) http.HandlerFunc {
+func connectHandler(ca *pki.CA, hub *chat.Hub) http.HandlerFunc {
 	return func(res http.ResponseWriter, req *http.Request) {
-		res.Header().Set("Content-Type", "application/json")
-		res.WriteHeader(200)
-		r := &serviceResponse{
-			Ok: true,
-			Response: "connecting",
+		// Verify header is present
+		if req.Header.Get("X-user-certificate") == "" {
+			log.Println("missing user certificate")
+			return
 		}
-		res.Write(r.encode())
+
+		// Decode header
+		cert, err := base64.StdEncoding.DecodeString(req.Header.Get("X-user-certificate"))
+		if err != nil {
+			log.Println("failed to decode provided certificate")
+			return
+		}
+
+		// Validate certificate
+		if err = ca.VerifyCertificate(cert, &pki.VerifyOptions{ProfileName: "user"}); err != nil {
+			log.Println(err.Error())
+			return
+		}
+
+		// Establish socket connection
+		serveWS(hub, res, req)
 	}
+}
+
+// Handles websocket requests
+func serveWS(hub *chat.Hub, w http.ResponseWriter, r *http.Request) {
+	conn, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	client := &chat.Client{
+		Hub:  hub,
+		Conn: conn,
+		Send: make(chan []byte, 256),
+	}
+	client.Hub.Register <- client
+
+	// Allow collection of memory referenced by the caller by doing all work in
+	// new goroutines.
+	go client.Write()
+	go client.Read()
 }

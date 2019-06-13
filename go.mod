@@ -4,8 +4,10 @@ go 1.12
 
 require (
 	github.com/bryk-io/x v0.0.0-20190613040437-efb92cfd1ef6
+	github.com/chzyer/readline v0.0.0-20160729034951-a0c5244a21f4
 	github.com/gorilla/mux v1.7.2
-	github.com/mitchellh/go-homedir v1.1.0
+	github.com/gorilla/websocket v1.4.0
+	github.com/logrusorgru/aurora v0.0.0-20190428105938-cea283e61946
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.4.0
 )
