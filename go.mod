@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/bryk-io/x v0.0.0-20190613040437-efb92cfd1ef6
+	github.com/gorilla/mux v1.7.2
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.4.0

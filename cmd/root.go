@@ -10,8 +10,10 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "suss-workshop",
-	Short: "Sample application for the SUSS workshop of June 2019",
+	Use:           "suss-workshop",
+	Short:         "Sample application for the SUSS workshop of June 2019",
+	SilenceUsage:  true,
+	SilenceErrors: true,
 }
 
 func Execute() {

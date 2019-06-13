@@ -6,18 +6,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// clientCmd represents the client command
-var clientCmd = &cobra.Command{
-	Use:   "client",
+var connectCmd = &cobra.Command{
+	Use:   "connect",
 	Short: "Connect to the sample digital service",
 	RunE:  runClient,
 }
 
 func init() {
-	rootCmd.AddCommand(clientCmd)
+	rootCmd.AddCommand(connectCmd)
 }
 
 func runClient(cmd *cobra.Command, args []string) error {
-	fmt.Println("client called")
+	fmt.Println("connecting now")
 	return nil
 }
