@@ -28,6 +28,8 @@ github.com/bryk-io/go-grpc-middleware v1.0.1-0.20190419153159-d28668ee9f4e h1:VK
 github.com/bryk-io/go-grpc-middleware v1.0.1-0.20190419153159-d28668ee9f4e/go.mod h1:lwNB3W5Q0GNanDBDFzVK4hIraWuY5AgB/ONoFPuF/tI=
 github.com/bryk-io/x v0.0.0-20190611172044-70298fee2853 h1:FEeyL+PtodChSN2QcBfbbb7MyqVuZZrOuLfC8cHSnP8=
 github.com/bryk-io/x v0.0.0-20190611172044-70298fee2853/go.mod h1:0zMBLe9iT03/2S2ltXo4bxHgI/Fp6o8fsEnBZ6i0OKc=
+github.com/bryk-io/x v0.0.0-20190613040437-efb92cfd1ef6 h1:JYyB7R4LRKLZ5PEg6GbEE7UgoUQZE1Uga6dpQ41eRao=
+github.com/bryk-io/x v0.0.0-20190613040437-efb92cfd1ef6/go.mod h1:0zMBLe9iT03/2S2ltXo4bxHgI/Fp6o8fsEnBZ6i0OKc=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
 github.com/chzyer/readline v0.0.0-20160729034951-a0c5244a21f4/go.mod h1:nSuG5e5PlCu98SY8svDHJxuZscDgtXS6KTTbou5AhLI=

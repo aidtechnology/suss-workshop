@@ -3,7 +3,7 @@ module github.com/aidtechnology/suss-workshop
 go 1.12
 
 require (
-	github.com/bryk-io/x v0.0.0-20190611172044-70298fee2853
+	github.com/bryk-io/x v0.0.0-20190613040437-efb92cfd1ef6
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.4.0

@@ -5,7 +5,10 @@ BINARY_NAME=suss-workshop
 VERSION_TAG=0.1.0
 
 # Include build code at compile time
-LD_FLAGS="-X github.com/aidtechnology/suss-workshop/cmd.buildCode=`git log --pretty=format:'%H' -n1`"
+LD_FLAGS="\
+-X github.com/aidtechnology/suss-workshop/cmd.buildCode=`git log --pretty=format:'%H' -n1`\
+-X github.com/aidtechnology/suss-workshop/cmd.buildTimestamp=`date +'%s'` \
+"
 
 build: ## Build for the default architecture in use
 	go build -v -ldflags $(LD_FLAGS) -o $(BINARY_NAME)

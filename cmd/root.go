@@ -9,8 +9,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-var buildCode = ""
-
 var rootCmd = &cobra.Command{
 	Use:   "suss-workshop",
 	Short: "Sample application for the SUSS workshop of June 2019",
