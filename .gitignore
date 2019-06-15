@@ -8,7 +8,7 @@ vendor/**
 # Binaries and support files
 ca-roots.crt
 suss-workshop
-suss-workshop-linux
+suss-workshop_*
 **/*_secret.yaml
 
 # Private keys

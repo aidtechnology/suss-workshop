@@ -14,7 +14,10 @@ build: ## Build for the default architecture in use
 	go build -v -ldflags $(LD_FLAGS) -o $(BINARY_NAME)
 
 linux: ## Build for linux systems
-	GOOS=linux GOARCH=amd64 go build -v -ldflags $(LD_FLAGS) -o $(BINARY_NAME)-linux
+	GOOS=linux GOARCH=amd64 go build -v -ldflags $(LD_FLAGS) -o $(BINARY_NAME)_$(VERSION_TAG)_linux
+
+windows: ## Build for Windows systems
+	GOOS=windows GOARCH=amd64 go build -v -ldflags $(LD_FLAGS) -o $(BINARY_NAME)_$(VERSION_TAG)_windows.exe
 
 docker: ## Build docker image
 	make linux
